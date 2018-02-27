@@ -15,11 +15,13 @@ class Db
     public function __construct()
     {
         $settings = $this->getPDOSettings();
-        try {
-            $this->pdo = new \PDO($settings['dsn'], $settings['user'], $settings['pass'], null);
-        } catch (\Exception $e) {
-            echo App::$core->runAction('Error', 'errorDB', [$e]);
-            die();
+        if (!$settings['fake']) {
+            try {
+                $this->pdo = new \PDO($settings['dsn'], $settings['user'], $settings['pass'], null);
+            } catch (\Exception $e) {
+                echo App::$core->runAction('Error', 'errorDB', [$e]);
+                die();
+            }
         }
     }
 
