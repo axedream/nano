@@ -37,12 +37,6 @@ class Controller
      */
     public function render ($viewName, array $params = [])
     {
-        if (count($params)>=1) {
-            foreach ($params as $key => $value) {
-                $$key = $value;
-            }
-        }
-
         $viewFile = ROOTPATH.DIRECTORY_SEPARATOR.'Views'.DIRECTORY_SEPARATOR.$viewName.'.php';
         extract($params);
         ob_start();
